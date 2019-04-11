@@ -5,25 +5,111 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="#000000"
+  tools:ignore="ContentDescription"
   tools:context=".MainActivity">
 
-  <Button
-    android:id="@+id/clickButton"
-    android:layout_width="wrap_content"
+  <LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+      android:layout_width="38dp"
+      android:layout_height="38dp"
+      android:src="@drawable/ic_chevron_left_black_24dp"/>
+
+    <ImageView
+      android:id="@+id/flashImageView"
+      android:layout_width="0dp"
+      android:layout_height="38dp"
+      android:layout_weight="1"
+      android:src="@drawable/ic_flash_on_black_24dp"/>
+
+    <ImageView
+      android:id="@+id/settingImageView"
+      android:layout_width="38dp"
+      android:layout_height="38dp"
+      android:src="@drawable/ic_settings_black_24dp"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:layout_constraintBottom_toTopOf="@+id/captureImageView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <TextView
+      android:id="@+id/frontTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="end"
+      android:text="@string/front"
+      android:textColor="#AAFFFFFF"
+      android:textSize="@dimen/main_active_camera_size"/>
+
+    <Space
+      android:layout_width="40dp"
+      android:layout_height="wrap_content"/>
+
+    <TextView
+      android:id="@+id/backTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="@string/back"
+      android:textColor="#FFFFFF"
+      android:textSize="@dimen/main_active_camera_size"/>
+
+  </LinearLayout>
+
+  <ImageView
+    android:id="@+id/captureImageView"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
     android:layout_marginBottom="16dp"
+    android:src="@drawable/ic_camera_alt_black_24dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"/>
 
-  <com.otaliastudios.cameraview.CameraView
-    android:id="@+id/camera"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:keepScreenOn="true"
-    app:layout_constraintBottom_toBottomOf="parent"
+  <FrameLayout
+    android:id="@+id/container"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+
+  <!--<Button-->
+  <!--android:id="@+id/clickButton"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="wrap_content"-->
+  <!--android:layout_marginBottom="16dp"-->
+  <!--app:layout_constraintBottom_toBottomOf="parent"-->
+  <!--app:layout_constraintEnd_toEndOf="parent"-->
+  <!--app:layout_constraintStart_toStartOf="parent"/>-->
+
+  <!--<com.otaliastudios.cameraview.CameraView-->
+  <!--android:id="@+id/camera"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="match_parent"-->
+  <!--android:keepScreenOn="true"-->
+  <!--app:layout_constraintBottom_toBottomOf="parent"-->
+  <!--app:layout_constraintEnd_toEndOf="parent"-->
+  <!--app:layout_constraintStart_toStartOf="parent"-->
+  <!--app:layout_constraintTop_toTopOf="parent"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
