@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     final CaptureFragment captureFragment = new CaptureFragment();
     FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().add(R.id.container, captureFragment, null);
+    fragmentManager.beginTransaction().add(R.id.container, captureFragment, null).commit();
 
     captureIV.setOnClickListener(new OnClickListener() {
       @Override
@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     frontTV.setOnClickListener(new OnClickListener() {
       @Override
-      public void onClick(View v) {
-        captureFragment.onChangeCameraView(Facing.FRONT);
+      public void onClick(View v) { captureFragment.onChangeCameraView(Facing.FRONT);
       }
     });
 

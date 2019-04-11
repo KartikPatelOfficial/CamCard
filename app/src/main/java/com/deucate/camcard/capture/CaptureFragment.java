@@ -3,6 +3,7 @@ package com.deucate.camcard.capture;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,12 @@ public class CaptureFragment extends Fragment implements CameraCallback {
   }
 
   @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    cameraView.setLifecycleOwner(getViewLifecycleOwner());
+  }
+
+  @Override
   public void onClickFlash() {
     if (cameraView.getFlash() == Flash.OFF) {
       cameraView.setFlash(Flash.ON);
@@ -61,5 +68,23 @@ public class CaptureFragment extends Fragment implements CameraCallback {
   @Override
   public void onClickCapture() {
     cameraView.takePicture();
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    cameraView.open();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    cameraView.close();
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    cameraView.destroy();
   }
 }
