@@ -33,27 +33,23 @@ public class MainActivity extends AppCompatActivity {
         captureFragment.onClickCapture();
       }
     });
-
     flashIV.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         captureFragment.onClickFlash();
       }
     });
-
     settingIV.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         captureFragment.onClickSettings();
       }
     });
-
     frontTV.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) { captureFragment.onChangeCameraView(Facing.FRONT);
       }
     });
-
     backTV.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
