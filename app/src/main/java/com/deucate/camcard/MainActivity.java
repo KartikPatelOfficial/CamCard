@@ -12,25 +12,35 @@ import com.otaliastudios.cameraview.Facing;
 
 public class MainActivity extends AppCompatActivity {
 
+  private FragmentManager fragmentManager;
+  private Boolean isCapturing = true;
+  public static CropFragment cropFragment = new CropFragment();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    ImageView captureIV = findViewById(R.id.captureImageView);
+    final ImageView captureIV = findViewById(R.id.captureImageView);
     ImageView flashIV = findViewById(R.id.flashImageView);
     ImageView settingIV = findViewById(R.id.settingImageView);
     TextView frontTV = findViewById(R.id.frontTextView);
     TextView backTV = findViewById(R.id.backTextView);
 
     final CaptureFragment captureFragment = new CaptureFragment();
-    FragmentManager fragmentManager = getSupportFragmentManager();
+    fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction().add(R.id.container, captureFragment, null).commit();
 
     captureIV.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        captureFragment.onClickCapture();
+        if (isCapturing) {
+          captureFragment.onClickCapture();
+          isCapturing = false;
+          captureIV.setImageResource(R.drawable.ic_done_black_24dp);
+        } else {
+          cropFragment.onClickCrop();
+        }
       }
     });
     flashIV.setOnClickListener(new OnClickListener() {
@@ -47,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
     });
     frontTV.setOnClickListener(new OnClickListener() {
       @Override
-      public void onClick(View v) { captureFragment.onChangeCameraView(Facing.FRONT);
+      public void onClick(View v) {
+        captureFragment.onChangeCameraView(Facing.FRONT);
       }
     });
     backTV.setOnClickListener(new OnClickListener() {
@@ -58,5 +69,4 @@ public class MainActivity extends AppCompatActivity {
     });
 
   }
-
 }

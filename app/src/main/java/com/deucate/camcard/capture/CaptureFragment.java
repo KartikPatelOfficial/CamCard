@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
+import com.deucate.camcard.CropFragment;
+import com.deucate.camcard.MainActivity;
 import com.deucate.camcard.R;
 import com.deucate.camcard.SharedViewModel;
 import com.otaliastudios.cameraview.Audio;
@@ -47,6 +49,8 @@ public class CaptureFragment extends Fragment implements CameraCallback {
           @Override
           public void onBitmapReady(@Nullable Bitmap bitmap) {
             viewModel.capture(bitmap);
+            getFragmentManager().beginTransaction()
+                .replace(R.id.container, MainActivity.cropFragment).commit();
           }
         });
       }
