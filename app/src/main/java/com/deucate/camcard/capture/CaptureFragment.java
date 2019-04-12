@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProviders;
-import com.deucate.camcard.CropFragment;
 import com.deucate.camcard.MainActivity;
 import com.deucate.camcard.R;
 import com.deucate.camcard.SharedViewModel;
@@ -44,7 +43,7 @@ public class CaptureFragment extends Fragment implements CameraCallback {
       @Override
       public void onPictureTaken(@NonNull PictureResult result) {
         super.onPictureTaken(result);
-
+        MainActivity.progressDialog.show();
         result.toBitmap(new BitmapCallback() {
           @Override
           public void onBitmapReady(@Nullable Bitmap bitmap) {

@@ -1,8 +1,5 @@
-package com.deucate.camcard;
+package com.deucate.camcard.crop;
 
-
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import com.deucate.camcard.crop.CropCallback;
+import com.deucate.camcard.MainActivity;
+import com.deucate.camcard.R;
+import com.deucate.camcard.SharedViewModel;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 public class CropFragment extends Fragment implements CropCallback {
@@ -31,6 +29,10 @@ public class CropFragment extends Fragment implements CropCallback {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_crop, container, false);
+
+    if (MainActivity.progressDialog.isShowing()){
+      MainActivity.progressDialog.dismiss();
+    }
 
     cropImageView = rootView.findViewById(R.id.cropImageView);
     SharedViewModel viewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
@@ -71,9 +73,10 @@ public class CropFragment extends Fragment implements CropCallback {
       finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
       out.flush();
       out.close();
-
+      Toast.makeText(getContext(), "Image saved in "+myDir.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     } catch (Exception e) {
       e.printStackTrace();
+      Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
     }
   }
 }

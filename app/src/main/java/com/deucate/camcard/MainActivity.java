@@ -1,5 +1,6 @@
 package com.deucate.camcard;
 
+import android.app.ProgressDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -8,18 +9,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import com.deucate.camcard.capture.CaptureFragment;
+import com.deucate.camcard.crop.CropFragment;
 import com.otaliastudios.cameraview.Facing;
 
 public class MainActivity extends AppCompatActivity {
 
-  private FragmentManager fragmentManager;
   private Boolean isCapturing = true;
   public static CropFragment cropFragment = new CropFragment();
+  public static ProgressDialog progressDialog;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    progressDialog = new ProgressDialog(this);
+    progressDialog.setTitle("Loading");
+    progressDialog.setMessage("Capturing image.");
+    progressDialog.setCancelable(false);
 
     final ImageView captureIV = findViewById(R.id.captureImageView);
     ImageView flashIV = findViewById(R.id.flashImageView);
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     TextView backTV = findViewById(R.id.backTextView);
 
     final CaptureFragment captureFragment = new CaptureFragment();
-    fragmentManager = getSupportFragmentManager();
+    FragmentManager fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction().add(R.id.container, captureFragment, null).commit();
 
     captureIV.setOnClickListener(new OnClickListener() {
